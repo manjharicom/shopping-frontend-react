@@ -31,7 +31,7 @@ export const SidebarItem = ({ item, collapsed }) => {
         {hasChildren && open && !collapsed && (
           <div className="pl-8 space-y-1">
             {item.children.map((child, i) => (
-              <span className="flex items-center gap-2">
+              <span key={i} className="flex items-center gap-2">
                 {child.icon}
                 <a
                     key={i}

@@ -1,4 +1,3 @@
-import NavLinks from './nav-links';
 import Sidebar from './sidebar';
 
 import Link from 'next/link';

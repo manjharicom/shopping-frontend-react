@@ -1,5 +1,5 @@
 export default function Page(){
     return (
-        <div><p>Prices</p></div>
+        <div><p>Menus</p></div>
     );
 }
