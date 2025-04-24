@@ -17,8 +17,8 @@ export default async function SearchResultsTable({
       return `?searchText=${product}&categoryId=${categoryId}&areaId=${areaId}`;
     }
     var query = getQuery();
+    console.log(query);
     const products = await searchProducts(query);
-    console.log(products);
     return(
         <div className="inline-block min-w-full align-middle">
             

@@ -19,7 +19,6 @@ export default async function Page(props: {
     const product = searchParams?.product || '';
     const categoryId = searchParams?.categoryId || '';
     const areaId = searchParams?.areaId || '';
-    console.log(categoryId);
      return (
         <>
         <div className="flex flex-row items-center">
