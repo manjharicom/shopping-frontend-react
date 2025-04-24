@@ -26,12 +26,14 @@ export default async function SearchResultsTable({
                   className="mb-2 w-full rounded-md bg-white p-4">
                   <table>
                     <thead>
+                      <tr>
                       <th>
                         Product Name
                       </th>
                       <th>
                         Options
                       </th>
+                      </tr>
                     </thead>
                     <tbody>
                     {products.map((product) => (  

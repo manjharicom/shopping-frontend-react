@@ -1,17 +1,32 @@
 "use server"
-
+import { useEffect, useState } from 'react';
 import { NewProductModel, EditProductModel, ProductModel } from "./definitions";
 
 const baseProductUrl: string = `${process.env.REACT_APP_API_ROOT_URL}product/`;
 
 export async function searchProducts(query?: string) {
+    //const [data, setData] = useState([]);
     var url: string = `${baseProductUrl}search/`;
     if (query !== undefined){
       url += query;
     }
     //console.log(url);
-    const res = await fetch(url!);
+    // useEffect(() => {
+    //     fetch(url!, {
+    //         headers:{
+    //             "Content-Type": "application/json"
+    //         }
+    //     })
+    //     .then(response => response.json())
+    //     .then(setData);
+    // }, []);
+    const res = await fetch(url!, {
+        headers:{
+            "Content-Type": "application/json"
+        }
+    });
     return res.json() as Promise<ProductModel[]>;
+   // return data
 }
 
 export async function getShoppingListProducts(query?: string) {
@@ -19,7 +34,11 @@ export async function getShoppingListProducts(query?: string) {
     if (query !== undefined){
       url += query;
     }
-    const res = await fetch(url!);
+    const res = await fetch(url!, {
+        headers:{
+            "Content-Type": "application/json"
+        }
+    });
     return res.json();
 }
 

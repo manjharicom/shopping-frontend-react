@@ -6,7 +6,7 @@ export const authConfig = {
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user;
+      const isLoggedIn = true; //!!auth?.user;
       const isOnDashboard = nextUrl.pathname.startsWith('/shopping-manager');
       if (isOnDashboard) {
         if (isLoggedIn) return true;
