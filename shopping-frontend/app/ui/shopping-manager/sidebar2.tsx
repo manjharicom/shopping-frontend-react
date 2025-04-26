@@ -1,33 +1,35 @@
+"use client"
 // components/Sidebar.js
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import {navItems} from './nav-items';
 import SidebarItem from './sidebar-item2';
 
 export default function Sidebar() {
-  const router = useRouter();
+  //const router = useRouter();
   const [openMenus, setOpenMenus] = useState({});
   const [sidebarOpen, setSidebarOpen] = useState(true); // State for mobile view
+  const pathname = usePathname();
 
   useEffect(() => {
     // Keep open any menu that contains the active route
     navItems.forEach((item, idx) => {
       if (item.children) {
         const isActive = item.children.some(child =>
-          router.pathname.startsWith(child.href)
+          pathname.startsWith(child.href)
         );
         if (isActive) {
           setOpenMenus(prev => ({ ...prev, [idx]: true }));
         }
       }
     });
-  }, [router.pathname]);
+  }, []);
 
   const toggleMenu = (idx) => {
     setOpenMenus(prev => ({ ...prev, [idx]: !prev[idx] }));
   };
 
-  const isActive = (path) => router.pathname === path;
+  const isActive = (path) => pathname === path;
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);

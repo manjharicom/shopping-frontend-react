@@ -1,10 +1,9 @@
 // components/SidebarItem.js
-import { useState } from 'react';
-import { useRouter } from 'next/router';
+//import { useState } from 'react';
+//import { useRouter } from 'next/router';
 import { ChevronDown, ChevronUp } from 'lucide-react'; // Importing icons from lucide-react
 
 export default function SidebarItem({ item, index, openMenus, toggleMenu, isActive }) {
-  const router = useRouter();
 
   // Use an icon based on whether the item is a regular link or a collapsible menu
   const getIcon = () => {
