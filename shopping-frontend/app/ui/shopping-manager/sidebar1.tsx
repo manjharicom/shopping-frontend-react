@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import { SidebarItem } from './sidebaritem';
+import { SidebarItem } from './sidebaritem1';
 
 import {navItems} from './nav-items';
 

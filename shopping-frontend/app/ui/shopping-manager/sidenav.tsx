@@ -1,4 +1,4 @@
-import Sidebar from './sidebar';
+import Sidebar from './sideBar2';
 
 import Link from 'next/link';
 import ManjhariLogo from '@/app/ui/logo';
