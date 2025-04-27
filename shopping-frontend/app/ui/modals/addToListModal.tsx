@@ -35,7 +35,7 @@ export default function AddToListModal ({ isOpen, onClose, product, onReturn } :
         //let errors = {};
         if(!shoppingListId || shoppingListId === 0){
             errors.shoppingListId = 'Shopping List Is Required';
-        }
+        } 
         if(!quantity || quantity === 0){
             errors.quantity = 'Quantity Is Required';
         }
@@ -45,8 +45,9 @@ export default function AddToListModal ({ isOpen, onClose, product, onReturn } :
     };
 
   async function SubmitForm(event){
+    console.log(isFormValid);
+    event.preventDefault();
     if(isFormValid){
-        event.preventDefault();
         //const shoppingListId = event.target.elements.shoppingList.value;
         //const quantity = event.target.elements.quantity.value;
     
@@ -91,6 +92,7 @@ export default function AddToListModal ({ isOpen, onClose, product, onReturn } :
                                     id="shoppingList"
                                     name="shoppingList"
                                     onChange={(e) => setShoppingListId(e.target.value)}>
+                                    <option>Select...</option>
                                     {shoppingLists.map((item) => 
                                         <option key={item.shoppingListId} value={item.shoppingListId}>
                                             {item.name}
@@ -109,7 +111,7 @@ export default function AddToListModal ({ isOpen, onClose, product, onReturn } :
                                 id="quantity"
                                 name="quantity"
                                 type="number"
-                                onChange={(e) => setQuantity(e.target.value)}
+                                onInput={(e) => setQuantity(e.target.value)}
                             />
                             </div>
                         </div>
