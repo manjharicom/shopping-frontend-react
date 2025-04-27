@@ -1,5 +1,4 @@
-import Sidebar from './sideBar2';
-//import { useRouter } from 'next/router';
+import Sidebar from './sidebar1';
 import Link from 'next/link';
 import ManjhariLogo from '@/app/ui/logo';
 import { PowerIcon } from '@heroicons/react/24/outline';
