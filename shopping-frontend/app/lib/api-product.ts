@@ -10,7 +10,6 @@ export async function searchProducts(query?: string) {
     if (query !== undefined){
       url += query;
     }
-    //console.log(url);
     // useEffect(() => {
     //     fetch(url!, {
     //         headers:{
@@ -58,28 +57,25 @@ export async function addProduct(product: NewProductModel){
 export async function addProductToList(shoppingListId:number, productId: number, quantity: number, purchased?: boolean){
     let p = purchased == undefined || purchased == null ? 'false' : purchased;
     const url = `${baseProductUrl}Add/${shoppingListId}/${productId}/${quantity}/${p}`;
-    
-    const res =  await fetch(url!, {
+    await fetch(url!, {
         method: 'POST',
         body: null,
         headers: {
             'Content-type': 'application/json'
         }
     });
-    return res.json();
 }
 
- export async function removeProductFromList(shoppingListId:number, productId: number){
+ export async function removeProductFromList(shoppingListId:number | null, productId: number){
     const url = `${baseProductUrl}Delete/${shoppingListId}/${productId}`;
     
-    const res =  await fetch(url!, {
+    await fetch(url!, {
         method: 'DELETE',
         body: null,
         headers: {
             'Content-type': 'application/json'
         }
     });
-    return res.json();
 }
 
  export async function updateProduct(product: EditProductModel){

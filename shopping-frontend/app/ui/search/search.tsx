@@ -38,7 +38,7 @@ export default function Search({ categories, areas, placeholder }: { categories 
       setProducts(prods);
     };
 
-    const handleKeyDown = (event) => {
+    const handleKeyDown = (event: { key: string; }) => {
         if (event.key === 'Enter') {
             handleSearch();
           }
@@ -46,9 +46,8 @@ export default function Search({ categories, areas, placeholder }: { categories 
     
     return (
         <>
-        <div className="flex flex-row items-center">
-            <div className="relative flex flex-row items-center">
-                <div className="rounded-md bg-gray-50 p-4 md:p-6">
+            <div className="relative flex flex-row bg-gray-50 items-center">
+                <div className="rounded-md p-4 md:p-6">
                     <div className="mb-4">
                         <label htmlFor="product" className="mb-2 block text-sm font-medium">Product</label>
                     </div>
@@ -64,7 +63,7 @@ export default function Search({ categories, areas, placeholder }: { categories 
                             />
                     </div>
                 </div>
-                <div className="rounded-md bg-gray-50 p-4 md:p-6">
+                <div className="rounded-md p-4 md:p-6">
                     <div className="mb-4">
                         <label htmlFor="category" className="mb-2 block text-sm font-medium">Category</label>
                     </div>
@@ -86,7 +85,7 @@ export default function Search({ categories, areas, placeholder }: { categories 
                         </select>
                     </div>
                 </div>
-                <div className="rounded-md bg-gray-50 p-4 md:p-6">
+                <div className="rounded-md p-4 md:p-6">
                     <div className="mb-4">
                         <label htmlFor="area" className="mb-2 block text-sm font-medium">Storage Area</label>
                     </div>
@@ -109,12 +108,13 @@ export default function Search({ categories, areas, placeholder }: { categories 
                     </div>
                 </div>
             </div>
-            <button 
-                className="cursor-pointer rounded-md bg-white p-4 md:p-6" 
-                onClick={() => {handleSearch()}}
-                type="button">Search
-            </button>
-        </div>
+            <div className="relative flex flex-row bg-gray-50 p-2 items-center">
+                <button 
+                    className="cursor-pointer rounded-md p-4 md:p-6 btn btn-primary" 
+                    onClick={() => {handleSearch()}}
+                    type="button">Search
+                </button>
+            </div>
         <SearchResults products={products} />
         </>
     );

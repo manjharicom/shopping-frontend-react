@@ -30,6 +30,5 @@ export async function search(formData: FormData){
   };
   var query = `?searchText=${formFields.product}&categoryId=${formFields.category}&areaId=${formFields.area}`;
   const results = await searchProducts(query);
-  console.log(results);
   return results;
   }

@@ -11,9 +11,6 @@ async function getUser(email: string): Promise<User | undefined> {
     try {
       const pool = await sql.connect(config);
       const user = await pool.query<User[]>(`SELECT * FROM users WHERE email='${email}'`);
-      console.log(`user from sql:`);
-      console.log(user);
-      console.log(user.recordset[0]);
       return user.recordset[0];
     } catch (error) {
       console.error('Failed to fetch user:', error);
@@ -37,7 +34,6 @@ export const { auth, signIn, signOut } = NextAuth({
             const passwordsMatch = await bcrypt.compare(password, user.password);
             if (passwordsMatch) return user;
         }
-        console.log('Invalid credentials');
         return null;
       },
     }),
