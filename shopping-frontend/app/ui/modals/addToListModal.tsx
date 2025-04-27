@@ -25,14 +25,35 @@ export default function AddToListModal ({ isOpen, onClose, product, onReturn } :
     fetchData();
   }, []);
 
+  const [shoppingListId, setShoppingListId] = useState();
+  const [quantity, setQuantity] = useState();
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {validateForm(), [shoppingListId, quantity]});
+    const validateForm = () => {
+        //let errors = {};
+        if(!shoppingListId || shoppingListId === 0){
+            errors.shoppingListId = 'Shopping List Is Required';
+        }
+        if(!quantity || quantity === 0){
+            errors.quantity = 'Quantity Is Required';
+        }
+
+        setErrors(errors);
+        setIsFormValid(Object.keys(errors).length === 0);
+    };
+
   async function SubmitForm(event){
-    event.preventDefault();
-    const shoppingListId = event.target.elements.shoppingList.value;
-    const quantity = event.target.elements.quantity.value;
-
-    await addProductToList(shoppingListId, product.productId, quantity);
-
-    handleReturn(shoppingListId);
+    if(isFormValid){
+        event.preventDefault();
+        //const shoppingListId = event.target.elements.shoppingList.value;
+        //const quantity = event.target.elements.quantity.value;
+    
+        await addProductToList(shoppingListId, product.productId, quantity);
+    
+        handleReturn(shoppingListId);
+    }
   }
 
   return (
@@ -61,13 +82,15 @@ export default function AddToListModal ({ isOpen, onClose, product, onReturn } :
                             </div>
                         </div>
                         <div className="flex flex-row">
+                            {errors.shoppingListId && <p>{errors.shoppingListId}</p>}
                             <label htmlFor="shoppingList">
                                 <span >Shopping List</span>
                             </label>
                             <div>
                                 <select 
                                     id="shoppingList"
-                                    name="shoppingList">
+                                    name="shoppingList"
+                                    onChange={(e) => setShoppingListId(e.target.value)}>
                                     {shoppingLists.map((item) => 
                                         <option key={item.shoppingListId} value={item.shoppingListId}>
                                             {item.name}
@@ -77,14 +100,16 @@ export default function AddToListModal ({ isOpen, onClose, product, onReturn } :
                             </div>
                         </div>
                         <div className="flex flex-row">
-                            <label htmlFor="quantity">
+                        {errors.quantity && <p>{errors.quantity}</p>}
+                        <label htmlFor="quantity">
                                 <span >Quantity</span>
                             </label>
                             <div>
                             <input
                                 id="quantity"
                                 name="quantity"
-                                type="number" 
+                                type="number"
+                                onChange={(e) => setQuantity(e.target.value)}
                             />
                             </div>
                         </div>
