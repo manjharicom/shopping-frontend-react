@@ -2,9 +2,9 @@
 import { AreaModel, CategoryProduct } from '@/app/lib/definitions';
 import { search } from '@/app/lib/actions'
 
-export default function Form({ categories, areas }: {categories : CategoryProduct[], areas : AreaModel[] }){
+export default function SearchForm({ categories, areas }: {categories : CategoryProduct[], areas : AreaModel[] }){
     return (
-        <form className="mx-auto bg-white"action={search}>
+        <form className="mx-auto bg-white" action={search}>
             <div className="flex flex-row items-center">
                 <div className="rounded-md bg-gray-50 p-4 md:p-6">
                     <div className="mb-4">

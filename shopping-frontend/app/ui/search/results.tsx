@@ -1,27 +1,9 @@
-import { search } from '@/app/lib/actions'
-import { searchProducts } from '@/app/lib/api-product'
+import { ProductModel } from "@/app/lib/definitions";
 
-export default async function SearchResultsTable({
-    product,
-    categoryId,
-    areaId,
-    currentPage,
-  }: {
-    product: string;
-    categoryId: string;
-    areaId:string;
-    currentPage: number;
-  }){
-
-    function getQuery(){
-      return `?searchText=${product}&categoryId=${categoryId}&areaId=${areaId}`;
-    }
-    var query = getQuery();
-    console.log(query);
-    const products = await searchProducts(query);
-    return(
+export default function SearchResults({products} : {products : ProductModel[]}) {
+  console.log(products);
+  return (
         <div className="inline-block min-w-full align-middle">
-            
               <div
                   className="mb-2 w-full rounded-md bg-white p-4">
                   <table>
@@ -52,5 +34,5 @@ export default async function SearchResultsTable({
                   </table>
               </div>
         </div>
-    )
+    );
 }
