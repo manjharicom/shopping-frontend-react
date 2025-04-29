@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import {useForm} from 'react-hook-form';
+
 import "@/app/ui/styles/modal.css";
 import { ProductModel } from '@/app/lib/definitions';
 import { getShoppingLists } from '@/app/lib/api-shopping-lists';
@@ -45,7 +47,9 @@ export default function AddToListModal ({ isOpen, onClose, product, onReturn } :
     // };
 
   async function SubmitForm(event){
-    console.log(isFormValid);
+    console.log(shoppingListId);
+    console.log(quantity);
+    console.log(errors);
     event.preventDefault();
     if(isFormValid){
         //const shoppingListId = event.target.elements.shoppingList.value;
@@ -95,7 +99,7 @@ export default function AddToListModal ({ isOpen, onClose, product, onReturn } :
                           onChange={(e) => setShoppingListId(e.target.value)}
                           className="p-3 border border-gray-300 text-sm font-normal rounded-sm"
                           >
-                          <option>Select...</option>
+                          <option value="">Select...</option>
                             {shoppingLists.map((item) => 
                           <option key={item.shoppingListId} value={item.shoppingListId}>
                                       {item.name}
@@ -103,6 +107,8 @@ export default function AddToListModal ({ isOpen, onClose, product, onReturn } :
                           )}
                         </select>
                     </div>
+                  </div>
+                  <div className="flex flex-wrap -mr-3.5 -ml-3.5">
                   </div>
                   <div className="mb-4 flex flex-wrap -mr-3.5 -ml-3.5">
                     <label htmlFor="quantity" className="relative flex flex-grow-0 flex-shrink-0 basis-[33%] max-w-1/3 pr-3.5 pl-3.5 pt-1.5 pb-1.5 text-sm">
@@ -129,6 +135,13 @@ export default function AddToListModal ({ isOpen, onClose, product, onReturn } :
                         className="p-3 border border-gray-300 text-sm font-normal rounded-sm" />
                     </div>
                   </div>
+                  {!isFormValid ? 
+                  <div className="mb-4 flex flex-wrap -mr-3.5 -ml-3.5">
+                    <div className="relative pr-3.5 pl-3.5">
+                      <span className="text-red-500">Please enter a value for each field in the form</span>
+                    </div>
+                  </div>
+                  : null}
                 </div>
               </div>
               <div className="mb-4 flex flex-wrap -mr-3.5 -ml-3.5">
@@ -136,8 +149,6 @@ export default function AddToListModal ({ isOpen, onClose, product, onReturn } :
                 <button className="cursor-pointer text-xs pt-2 pr-2.5 pb-2 pl-2.5 ml-4 min-w-20 inline-block font-normal text-center align-middle border rounded-sm text-white bg-green-600 border-green-600" type="button" onClick={onClose}>
                   Close
                 </button>
-              </div>
-              <div className="mb-4 flex flex-wrap -mr-3.5 -ml-3.5">
               </div>
             </form>
         </div>
