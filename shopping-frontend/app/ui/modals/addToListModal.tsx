@@ -30,19 +30,19 @@ export default function AddToListModal ({ isOpen, onClose, product, onReturn } :
   const [isFormValid, setIsFormValid] = useState(false);
   const [errors, setErrors] = useState({});
 
-  useEffect(() => {validateForm(), [shoppingListId, quantity]});
-    const validateForm = () => {
-        //let errors = {};
-        if(!shoppingListId || shoppingListId === 0){
-            errors.shoppingListId = 'Shopping List Is Required';
-        } 
-        if(!quantity || quantity === 0){
-            errors.quantity = 'Quantity Is Required';
-        }
+  //useEffect(() => {validateForm(), [shoppingListId, quantity]});
+    // const validateForm = () => {
+    //     //let errors = {};
+    //     if(!shoppingListId || shoppingListId === 0){
+    //         errors.shoppingListId = 'Shopping List Is Required';
+    //     } 
+    //     if(!quantity || quantity === 0){
+    //         errors.quantity = 'Quantity Is Required';
+    //     }
 
-        setErrors(errors);
-        setIsFormValid(Object.keys(errors).length === 0);
-    };
+    //     setErrors(errors);
+    //     setIsFormValid(Object.keys(errors).length === 0);
+    // };
 
   async function SubmitForm(event){
     console.log(isFormValid);
@@ -59,67 +59,86 @@ export default function AddToListModal ({ isOpen, onClose, product, onReturn } :
 
   return (
     <div className="modal-overlay">
-      <div className="modal-content">
-      <h3>Add Product to Shopping List</h3>
-      <hr />
-      <button className="rounded btn btn-secondary modal-close" onClick={onClose}>Close</button>
-        <h2>{product?.name}</h2>
-        <div>
-            <form onSubmit={SubmitForm}>
-                <div>
-                    <div>
-                        <div className="flex flex-row">
-                            <label htmlFor="name">
-                                <span >Product</span>
-                            </label>
-                            <div>
-                                <input 
-                                type="text"
-                                readOnly
-                                id="name"
-                                name="name"
-                                value={product?.name}
-                                />
-                            </div>
-                        </div>
-                        <div className="flex flex-row">
-                            {errors.shoppingListId && <p>{errors.shoppingListId}</p>}
-                            <label htmlFor="shoppingList">
-                                <span >Shopping List</span>
-                            </label>
-                            <div>
-                                <select 
-                                    id="shoppingList"
-                                    name="shoppingList"
-                                    onChange={(e) => setShoppingListId(e.target.value)}>
-                                    <option>Select...</option>
-                                    {shoppingLists.map((item) => 
-                                        <option key={item.shoppingListId} value={item.shoppingListId}>
-                                            {item.name}
-                                        </option>
-                                    )}
-                                </select>
-                            </div>
-                        </div>
-                        <div className="flex flex-row">
-                        {errors.quantity && <p>{errors.quantity}</p>}
-                        <label htmlFor="quantity">
-                                <span >Quantity</span>
-                            </label>
-                            <div>
-                            <input
-                                id="quantity"
-                                name="quantity"
-                                type="number"
-                                onInput={(e) => setQuantity(e.target.value)}
-                            />
-                            </div>
-                        </div>
-                    </div>
+      <div className="relative flex flex-start justify-between p-4 border-b border-b-gray-300 max-w-3xl">
+        <h3 className="text-2xl font-semibold">Add Product to Shopping List</h3>
+        <button className="border-0 bg-white cursor-pointer" onClick={onClose}><span className="text-sm font-bold text-gray-500">x</span></button>
+      </div>
+      <div className="p-4">
+          <h3 className="text-2xl font-semibold">{product?.name}</h3>
+          <form onSubmit={SubmitForm}>
+            <div className="relative flex flex-col min-w-0 mb-6">
+              <div className="min-h-px p-5 basis-auto grow shrink">
+                <div className="mb-4 flex flex-wrap -mr-3.5 -ml-3.5">
+                  <label htmlFor="name" className="relative flex flex-grow-0 flex-shrink-0 basis-[33%] max-w-1/3 pr-3.5 pl-3.5 pt-1.5 pb-1.5 text-sm">
+                      <span >Product</span>
+                  </label>
+                  <div className="relative flex flex-grow-0 flex-shrink-0 basis-[33%] max-w-1/3 pr-3.5 pl-3.5">
+                    <input 
+                        type="text"
+                        readOnly
+                        id="name"
+                        name="name"
+                        value={product?.name}
+                        className="p-3 border border-gray-300 text-sm font-normal rounded-sm bg-gray-200 text-gray-500"
+                      />
+                  </div>
                 </div>
-                <button className="rounded btn btn-primary" type="submit">Add</button>
-                </form>
-        </div>
+                <div className="mb-4 flex flex-wrap -mr-3.5 -ml-3.5">
+                  <label htmlFor="shoppingList" className="relative flex flex-grow-0 flex-shrink-0 basis-[33%] max-w-1/3 pr-3.5 pl-3.5 pt-1.5 pb-1.5 text-sm">
+                    <span >Shopping List</span>
+                  </label>
+                  <div className="relative flex flex-grow-0 flex-shrink-0 basis-[33%] max-w-1/3 pr-3.5 pl-3.5">
+                    <select 
+                        id="shoppingList"
+                        name="shoppingList"
+                        onChange={(e) => setShoppingListId(e.target.value)}
+                        className="p-3 border border-gray-300 text-sm font-normal rounded-sm"
+                        >
+                        <option>Select...</option>
+                          {shoppingLists.map((item) => 
+                        <option key={item.shoppingListId} value={item.shoppingListId}>
+                                    {item.name}
+                        </option>
+                        )}
+                      </select>
+                  </div>
+                </div>
+                <div className="mb-4 flex flex-wrap -mr-3.5 -ml-3.5">
+                  <label htmlFor="quantity" className="relative flex flex-grow-0 flex-shrink-0 basis-[33%] max-w-1/3 pr-3.5 pl-3.5 pt-1.5 pb-1.5 text-sm">
+                    <span >Quantity</span>
+                  </label>
+                  <div className="relative flex flex-grow-0 flex-shrink-0 basis-[33%] max-w-1/3 pr-3.5 pl-3.5">
+                    <input
+                        id="quantity"
+                        name="quantity"
+                        type="number"
+                        onInput={(e) => setQuantity(e.target.value)}
+                        className="p-3 border border-gray-300 text-sm font-normal rounded-sm"
+                    />
+                  </div>
+                </div>
+                <div className="mb-4 flex flex-wrap -mr-3.5 -ml-3.5">
+                  <label htmlFor="purchased" className="relative flex flex-grow-0 flex-shrink-0 basis-[33%] max-w-1/3 pr-3.5 pl-3.5 pt-1.5 pb-1.5 text-sm">
+                  <span>Purchased</span></label>
+                  <div className="relative flex flex-grow-0 flex-shrink-0 basis-[33%] max-w-1/3 pr-3.5 pl-3.5">
+                    <input 
+                      id="purchased" 
+                      name="purchased" 
+                      type="checkbox" 
+                      className="p-3 border border-gray-300 text-sm font-normal rounded-sm" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="mb-4 flex flex-wrap -mr-3.5 -ml-3.5">
+              <button className="text-xs pt-1 pr-2.5 pb-2 pl-2.5 ml-4 min-w-20 inline-block font-normal text-center align-middle border rounded-sm text-white bg-blue-950 border-blue-950" type="submit">Add</button>
+            </div>
+            <div>
+              <button className="text-xs pt-1 pr-2.5 pb-2 pl-2.5 ml-4 min-w-20 inline-block font-normal text-center align-middle border rounded-sm text-white bg-green-950 border-green-950" type="button" onClick={onClose}>
+                Close
+              </button>
+            </div>
+          </form>
       </div>
     </div>
   );
